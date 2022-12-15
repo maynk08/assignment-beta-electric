@@ -1,0 +1,28 @@
+h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container{
+    height: 55vh;
+    width: 150vh;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+.input-field{
+    display: flex;
+    margin: auto;
+    height: 2em;
+    width: 40em;
+    text-align: center;
+}
+
+button{
+    margin: 10px;
+    height:3em;
+    width:10em;
+    border:2px solid black;
+    border-radius: 5%;
+}
