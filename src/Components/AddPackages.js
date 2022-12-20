@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
+import axios, { all } from 'axios'
 import './AddPackage.css'
 //https://api.npms.io/v2/search?q=reactjs
 
@@ -10,7 +11,10 @@ const AddPackages = () => {
   const [data, setData] = useState([])
   const [texts,setTexts] = useState("")
   const [selected,setSelected] = useState("")
-  const [packages,setPackage] = useState(new Set())
+  
+  const [err,setErr] = useState(false)
+ 
+  const navigate = useNavigate()
   
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -21,12 +25,38 @@ const AddPackages = () => {
   const handleClick = (e) => {
     e.preventDefault()
     //console.log(selected)
+    if(texts=="" || selected==""){
+      setErr(true)
+    }
 
-    setPackage([...packages,selected])
-   
-  localStorage.setItem("packages",JSON.stringify(packages))
+    else{
+
+      let items = localStorage.getItem("packages")
+      //console.log(items)
+      if(items == null && err == false){
+        localStorage.setItem("packages",JSON.stringify([selected]))
+       
+      }
   
+      else{
+        items = JSON.parse(items)
+        let allItems = [...items,selected]
+        localStorage.setItem("packages",JSON.stringify(allItems))
+       
+      }
+         navigate('/')
+    }
+
+
+   
+
+  
+   
   }
+
+  // useEffect(()=>{
+   
+  // },[packages])
 
   useEffect(() => {
 
@@ -39,6 +69,10 @@ const AddPackages = () => {
     }
     getData()
   }, [search])
+
+  // useEffect(()=>{
+  //   navigate('/')
+  // },[localStorage.setItem("packages")])
 
   return (
     <>
@@ -77,6 +111,11 @@ const AddPackages = () => {
      onChange = {(e)=>setTexts(e.target.value)}
     ></textarea>
 
+    {
+      err==true ?  <p style={{color:"red"}} > <b> Error !! You have to select a package and add reason !! </b></p> : <p>{""}</p>
+    }
+  
+  
     <button onClick={handleClick}> <b> Add Package + </b> </button>
 
   {console.log(selected)}
