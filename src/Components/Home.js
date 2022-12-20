@@ -29,9 +29,15 @@ const Home = () => {
   const handleDelete = (index,e) => {
 
     setData(data.filter((v, i) => i !== index))
-    localStorage.setItem("packages",JSON.stringify(data))
+    setFlag(true)
    
 }
+
+useEffect(()=>{
+  if(flag==true){
+    localStorage.setItem("packages",JSON.stringify(data))
+  }
+},[data])
 
 
 
