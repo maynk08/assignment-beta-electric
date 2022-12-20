@@ -46,9 +46,12 @@ useEffect(()=>{
     <>
     <hr />
       <h3>All your favourite npm package list </h3>
-      <hr />
+        <hr />
+
+       
       <div className="Table-data">
-        {console.log(data)}
+       
+       
         {data.length > 0 ?
           <table>
             <tr>
@@ -73,15 +76,19 @@ useEffect(()=>{
           <>
             <div className='no-data'><b>No Favourite package added yet !</b></div>
             <br />
+
+           
+           
           </>
 
 
         }
 
-
-        <button className="add-pkg" onClick={handleAddClick}> <b>Add+</b> </button>
-
+          <button className="add-pkg" onClick={handleAddClick}> <b>Add+</b> </button>
       </div>
+     
+      <br />
+     
 
     </>
   )

@@ -11,6 +11,7 @@ const AddPackages = () => {
   const [data, setData] = useState([])
   const [texts,setTexts] = useState("")
   const [selected,setSelected] = useState("")
+  const [alreadyExist,setAlreadyExist] = useState(false)
   
   const [err,setErr] = useState(false)
  
@@ -29,6 +30,7 @@ const AddPackages = () => {
       setErr(true)
     }
 
+
     else{
 
       let items = localStorage.getItem("packages")
@@ -40,23 +42,25 @@ const AddPackages = () => {
   
       else{
         items = JSON.parse(items)
-        let allItems = [...items,selected]
-        localStorage.setItem("packages",JSON.stringify(allItems))
-       
+        if(items.includes(selected)){
+          setAlreadyExist(true)
+        }
+        else{
+          let allItems = [...items,selected]
+          localStorage.setItem("packages",JSON.stringify(allItems))
+          navigate('/')
+        }
+              
       }
-         navigate('/')
+       
     }
-
-
-   
-
-  
-   
+ 
   }
 
-  // useEffect(()=>{
-   
-  // },[packages])
+ const handleBack = (e) =>{
+  e.preventDefault()
+  navigate('/')
+ }
 
   useEffect(() => {
 
@@ -97,9 +101,12 @@ const AddPackages = () => {
         <br />
 
       </>)}
-
+      
+    
 
     </div>
+
+    {alreadyExist === true ? <p style={{color:"red", borderBlockColor:"red"}}> <b>{"Item already added in list !"}</b></p> : <p>{""}</p>}
 
     <p> <b>Why this is your favourite ?</b> </p>
 
@@ -117,8 +124,9 @@ const AddPackages = () => {
   
   
     <button onClick={handleClick}> <b> Add Package + </b> </button>
+    <button onClick={handleBack}><b>Back</b></button>
 
-  {console.log(selected)}
+
   
     </>
   )

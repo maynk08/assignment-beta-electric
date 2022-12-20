@@ -22,13 +22,15 @@
 
   .no-data{
     border: 2px solid black;
-    height:20em;
+    height: 20em;
     width: 30em;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -12em;
   }
 
   .add-pkg{
     color: black;
+  
   }

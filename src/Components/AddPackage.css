@@ -9,11 +9,12 @@ h3{
     width: 150vh;
     overflow-y: scroll;
     margin: auto;
+    border: 1px solid rgb(9, 9, 9);
 }
 
 .input-field{
     display: flex;
-    margin: auto;
+    margin: 3px auto;
     height: 2em;
     width: 40em;
     text-align: center;
